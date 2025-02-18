@@ -3,31 +3,24 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: #ffffff;
-    --foreground: #0f172a;
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-    --secondary: #6366f1;
-    --secondary-foreground: #ffffff;
-    --muted: #f1f5f9;
-    --muted-foreground: #64748b;
-  }
-
-  .dark {
-    --background: #0a0a0a;
-    --foreground: #f8fafc;
-    --primary: #60a5fa;
-    --primary-foreground: #ffffff;
-    --secondary: #818cf8;
-    --secondary-foreground: #ffffff;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
+  body {
+    @apply bg-[#1C1C1C] text-white antialiased;
   }
 }
 
-@layer base {
-  body {
-    @apply bg-background text-foreground antialiased;
-  }
+/* Custom styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
