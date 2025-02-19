@@ -318,53 +318,14 @@ export default function Hero() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#1C1C1C] overflow-hidden">
-      {/* Command Tags */}
-      <div
-        ref={topRightTagRef}
-        className="fixed top-24 right-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
-                 text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
-                 shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
-                 transition-all duration-200 ease-out cursor-pointer"
-      >
-        <span className="text-green-400">$</span> npm run build
-      </div>
-
-      <div
-        ref={topLeftTagRef}
-        className="fixed top-24 left-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
-                 text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
-                 shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
-                 transition-all duration-200 ease-out cursor-pointer"
-      >
-        <span className="text-yellow-400">$</span> yarn install
-      </div>
-
-      <div
-        ref={bottomLeftTagRef}
-        className="fixed bottom-8 left-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
-                 text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
-                 shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
-                 transition-all duration-200 ease-out cursor-pointer"
-      >
-        <span className="text-blue-400">{`>`}</span> git push origin main
-      </div>
-
-      <div
-        ref={bottomRightTagRef}
-        className="fixed bottom-8 right-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
-                 text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
-                 shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
-                 transition-all duration-200 ease-out cursor-pointer"
-      >
-        <span className="text-purple-400">$</span> docker-compose up
-      </div>
-
+    <>
       {/* Modern Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
+      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div className="mx-auto px-6 py-4">
-          <div className="backdrop-blur-md bg-[#1C1C1C]/40 rounded-2xl 
-                       border border-gray-700/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+          <div className="backdrop-blur-md bg-[#1C1C1C]/90 rounded-2xl 
+                       border border-gray-700/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]
+                       transition-all duration-300 hover:bg-[#1C1C1C]/95
+                       hover:border-gray-600/50 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)]">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 {/* Logo/Name */}
@@ -445,153 +406,196 @@ export default function Hero() {
         </div>
       </nav>
 
-      {/* Enhanced Grid Background with Mouse Interaction */}
-      <div 
-        ref={gridRef}
-        className="absolute inset-0 z-0 transition-transform duration-300 ease-out
-                  before:content-[''] before:absolute before:inset-0 before:z-0
-                  before:bg-gradient-to-r before:from-transparent before:via-[#ffffff05] before:to-transparent
-                  before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-                  after:content-[''] after:absolute after:inset-0 after:z-[-1]
-                  after:bg-gradient-to-b after:from-[#ffffff05] after:via-transparent after:to-[#ffffff05]
-                  after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 80%),
-            linear-gradient(to right, rgba(75,75,75,0.15) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(75,75,75,0.15) 1px, transparent 1px),
-            linear-gradient(to right, rgba(50,50,50,0.1) 0.5px, transparent 0.5px),
-            linear-gradient(to bottom, rgba(50,50,50,0.1) 0.5px, transparent 0.5px)
-          `,
-          backgroundSize: '100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px',
-          backgroundPosition: 'center center',
-          boxShadow: 'inset 0 0 30px rgba(255,255,255,0.05)',
-          transition: 'transform 0.2s ease-out'
-        }}
-      >
-        <div className="absolute inset-0 backdrop-blur-[1px] hover:backdrop-blur-[2px] transition-all duration-300"></div>
-      </div>
-      
-      {/* Subtle Gradient Overlay */}
-      <div 
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(28,28,28,0) 0%, rgba(28,28,28,0.7) 100%)'
-        }}
-      />
+      <div className="relative min-h-screen bg-[#1C1C1C] overflow-hidden">
+        {/* Command Tags */}
+        <div
+          ref={topRightTagRef}
+          className="absolute top-24 right-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
+                   text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                   shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                   transition-all duration-200 ease-out cursor-pointer"
+        >
+          <span className="text-green-400">$</span> npm run build
+        </div>
 
-      {/* Main Content Container - Added subtle backdrop blur */}
-      <div className="relative z-10 container mx-auto px-6 pt-32 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Main Content */}
-          <div ref={textRef} className="space-y-8 backdrop-blur-sm bg-[#1C1C1C]/30 p-8 rounded-xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white 
-                         [text-shadow:_0_0_30px_rgba(255,255,255,0.4)]">
-              Alexandre Amaral
-            </h1>
-            
-            <h2 className="text-2xl md:text-3xl text-gray-300 
-                         [text-shadow:_0_0_20px_rgba(255,255,255,0.3)]">
-              {t.hero.title}
-            </h2>
-            <p className="text-gray-300 text-lg">
-              {t.hero.description}
-            </p>
+        <div
+          ref={topLeftTagRef}
+          className="absolute top-24 left-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
+                   text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                   shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                   transition-all duration-200 ease-out cursor-pointer"
+        >
+          <span className="text-yellow-400">$</span> yarn install
+        </div>
 
-            {/* Contact Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
-                         text-gray-200 rounded-lg border border-gray-700/50 
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         hover:bg-[#333333]/80 hover:border-gray-600
-                         hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
-                         transition-all duration-300 ease-out"
-              >
-                <FaGithub className="w-5 h-5 text-gray-300 group-hover:text-white 
-                                   transition-colors duration-300" />
-                <span>GitHub</span>
-              </a>
+        <div
+          ref={bottomLeftTagRef}
+          className="absolute bottom-8 left-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
+                   text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                   shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                   transition-all duration-200 ease-out cursor-pointer"
+        >
+          <span className="text-blue-400">{`>`}</span> git push origin main
+        </div>
 
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
-                         text-gray-200 rounded-lg border border-gray-700/50 
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         hover:bg-[#0077B5]/20 hover:border-[#0077B5]/50
-                         hover:shadow-[0_0_20px_rgba(0,119,181,0.2)]
-                         transition-all duration-300 ease-out"
-              >
-                <FaLinkedin className="w-5 h-5 text-gray-300 group-hover:text-[#0077B5] 
+        <div
+          ref={bottomRightTagRef}
+          className="absolute bottom-8 right-8 z-50 font-mono text-sm bg-[#2A2A2A]/90 
+                   text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                   shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                   transition-all duration-200 ease-out cursor-pointer"
+        >
+          <span className="text-purple-400">$</span> docker-compose up
+        </div>
+
+        {/* Enhanced Grid Background with Mouse Interaction */}
+        <div 
+          ref={gridRef}
+          className="absolute inset-0 z-0 transition-transform duration-300 ease-out
+                    before:content-[''] before:absolute before:inset-0 before:z-0
+                    before:bg-gradient-to-r before:from-transparent before:via-[#ffffff05] before:to-transparent
+                    before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+                    after:content-[''] after:absolute after:inset-0 after:z-[-1]
+                    after:bg-gradient-to-b after:from-[#ffffff05] after:via-transparent after:to-[#ffffff05]
+                    after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 80%),
+              linear-gradient(to right, rgba(75,75,75,0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(75,75,75,0.15) 1px, transparent 1px),
+              linear-gradient(to right, rgba(50,50,50,0.1) 0.5px, transparent 0.5px),
+              linear-gradient(to bottom, rgba(50,50,50,0.1) 0.5px, transparent 0.5px)
+            `,
+            backgroundSize: '100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px',
+            backgroundPosition: 'center center',
+            boxShadow: 'inset 0 0 30px rgba(255,255,255,0.05)',
+            transition: 'transform 0.2s ease-out'
+          }}
+        >
+          <div className="absolute inset-0 backdrop-blur-[1px] hover:backdrop-blur-[2px] transition-all duration-300"></div>
+        </div>
+        
+        {/* Subtle Gradient Overlay */}
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(28,28,28,0) 0%, rgba(28,28,28,0.7) 100%)'
+          }}
+        />
+
+        {/* Main Content Container - Added subtle backdrop blur */}
+        <div className="relative z-10 container mx-auto px-6 pt-32 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Main Content */}
+            <div ref={textRef} className="space-y-8 backdrop-blur-sm bg-[#1C1C1C]/30 p-8 rounded-xl">
+              <h1 className="text-4xl md:text-6xl font-bold text-white 
+                           [text-shadow:_0_0_30px_rgba(255,255,255,0.4)]">
+                Alexandre Amaral
+              </h1>
+              
+              <h2 className="text-2xl md:text-3xl text-gray-300 
+                           [text-shadow:_0_0_20px_rgba(255,255,255,0.3)]">
+                {t.hero.title}
+              </h2>
+              <p className="text-gray-300 text-lg">
+                {t.hero.description}
+              </p>
+
+              {/* Contact Buttons */}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <a
+                  href="https://github.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
+                           text-gray-200 rounded-lg border border-gray-700/50 
+                           shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                           hover:bg-[#333333]/80 hover:border-gray-600
+                           hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
+                           transition-all duration-300 ease-out"
+                >
+                  <FaGithub className="w-5 h-5 text-gray-300 group-hover:text-white 
                                      transition-colors duration-300" />
-                <span>LinkedIn</span>
-              </a>
+                  <span>GitHub</span>
+                </a>
 
-              <a
-                href="mailto:your.email@example.com"
-                className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
-                         text-gray-200 rounded-lg border border-gray-700/50 
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         hover:bg-[#EA4335]/20 hover:border-[#EA4335]/50
-                         hover:shadow-[0_0_20px_rgba(234,67,53,0.2)]
-                         transition-all duration-300 ease-out"
-              >
-                <FaEnvelope className="w-5 h-5 text-gray-300 group-hover:text-[#EA4335] 
-                                     transition-colors duration-300" />
-                <span>Email</span>
-              </a>
+                <a
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
+                           text-gray-200 rounded-lg border border-gray-700/50 
+                           shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                           hover:bg-[#0077B5]/20 hover:border-[#0077B5]/50
+                           hover:shadow-[0_0_20px_rgba(0,119,181,0.2)]
+                           transition-all duration-300 ease-out"
+                >
+                  <FaLinkedin className="w-5 h-5 text-gray-300 group-hover:text-[#0077B5] 
+                                       transition-colors duration-300" />
+                  <span>LinkedIn</span>
+                </a>
+
+                <a
+                  href="mailto:your.email@example.com"
+                  className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
+                           text-gray-200 rounded-lg border border-gray-700/50 
+                           shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                           hover:bg-[#EA4335]/20 hover:border-[#EA4335]/50
+                           hover:shadow-[0_0_20px_rgba(234,67,53,0.2)]
+                           transition-all duration-300 ease-out"
+                >
+                  <FaEnvelope className="w-5 h-5 text-gray-300 group-hover:text-[#EA4335] 
+                                       transition-colors duration-300" />
+                  <span>Email</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Terminal - Enhanced with more prominent glow */}
+            <div className="bg-[#2A2A2A]/90 backdrop-blur-sm rounded-lg p-6 
+                          shadow-[0_0_30px_rgba(0,0,0,0.4)]
+                          border border-gray-700/50
+                          min-h-[300px] flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.3)]"></div>
+                <div className="w-3.5 h-3.5 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.3)]"></div>
+                <div className="w-3.5 h-3.5 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.3)]"></div>
+              </div>
+              <div className="font-mono text-lg flex-1">
+                <span className="text-green-400">➜</span>
+                <span className="text-blue-400"> ~/code</span>
+                <div ref={terminalRef} className="text-gray-200 mt-4 leading-relaxed min-h-[200px]"></div>
+              </div>
             </div>
           </div>
 
-          {/* Terminal - Enhanced with more prominent glow */}
-          <div className="bg-[#2A2A2A]/90 backdrop-blur-sm rounded-lg p-6 
-                        shadow-[0_0_30px_rgba(0,0,0,0.4)]
-                        border border-gray-700/50
-                        min-h-[300px] flex flex-col">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.3)]"></div>
-              <div className="w-3.5 h-3.5 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.3)]"></div>
-              <div className="w-3.5 h-3.5 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.3)]"></div>
-            </div>
-            <div className="font-mono text-lg flex-1">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400"> ~/code</span>
-              <div ref={terminalRef} className="text-gray-200 mt-4 leading-relaxed min-h-[200px]"></div>
+          {/* Skills Ticker - Enhanced with more prominent glow */}
+          <div className="mt-20 overflow-hidden relative">
+            <div className="absolute left-0 top-0 w-[100px] h-full bg-gradient-to-r from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 w-[100px] h-full bg-gradient-to-l from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
+            <div 
+              ref={skillsTrackRef}
+              className="flex gap-8 whitespace-nowrap"
+              style={{ width: 'fit-content' }}
+            >
+              {[...t.skills, ...t.skills].map((skill, index) => (
+                <span
+                  key={index}
+                  className="text-gray-200 bg-[#2A2A2A]/80 px-6 py-3 rounded-full
+                           shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                           border border-gray-600/50 backdrop-blur-sm
+                           hover:border-gray-500 hover:bg-[#2A2A2A]/95
+                           hover:scale-105
+                           transition-all duration-300 ease-out
+                           text-base cursor-default"
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
         </div>
-
-        {/* Skills Ticker - Enhanced with more prominent glow */}
-        <div className="mt-20 overflow-hidden relative">
-          <div className="absolute left-0 top-0 w-[100px] h-full bg-gradient-to-r from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 w-[100px] h-full bg-gradient-to-l from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
-          <div 
-            ref={skillsTrackRef}
-            className="flex gap-8 whitespace-nowrap"
-            style={{ width: 'fit-content' }}
-          >
-            {[...t.skills, ...t.skills].map((skill, index) => (
-              <span
-                key={index}
-                className="text-gray-200 bg-[#2A2A2A]/80 px-6 py-3 rounded-full
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         border border-gray-600/50 backdrop-blur-sm
-                         hover:border-gray-500 hover:bg-[#2A2A2A]/95
-                         hover:scale-105
-                         transition-all duration-300 ease-out
-                         text-base cursor-default"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   );
 }
