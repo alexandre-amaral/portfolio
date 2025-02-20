@@ -1,27 +1,34 @@
-'use client';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { LanguageProvider } from './contexts/LanguageContext';
 
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+const inter = Inter({ subsets: ['latin'] });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: 'Alexandre Amaral - Portfolio',
+  description: 'Full Stack Developer Portfolio',
+};
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+function RootLayoutClient({ children }: { children: React.ReactNode }) {
+  return (
+    <LanguageProvider>
+      {children}
+    </LanguageProvider>
+  );
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
-        {children}
+      <body className={inter.className}>
+        <RootLayoutClient>
+          {children}
+        </RootLayoutClient>
       </body>
     </html>
   );

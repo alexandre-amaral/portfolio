@@ -52,7 +52,8 @@ export default function AboutMe() {
         y: 50,
         opacity: 0,
         stagger: 0.2,
-        ease: "power3.out"
+        ease: "power3.out",
+        delay: 0.4
       });
 
       gsap.from(".contact-item", {
@@ -61,7 +62,7 @@ export default function AboutMe() {
         opacity: 0,
         stagger: 0.1,
         ease: "power2.out",
-        delay: 0.5
+        delay: 0.8
       });
     }
   }, [isInView]);
@@ -72,28 +73,67 @@ export default function AboutMe() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="min-h-screen bg-[#1C1C1C] relative overflow-hidden py-20"
+      transition={{
+        duration: 0.6,
+        ease: "easeOut"
+      }}
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1C1C1C]/50 to-[#1C1C1C]" />
-      </div>
+      {/* Animated Background with enhanced transition */}
+      <motion.div 
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ 
+          opacity: [0, 0.2, 1],
+          scale: [1.1, 1.05, 1]
+        }}
+        transition={{
+          duration: 1.2,
+          times: [0, 0.5, 1],
+          ease: "easeOut",
+          delay: 0.2
+        }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1C1C1C]/50 to-[#1C1C1C]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        />
+      </motion.div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ 
+            duration: 0.8,
+            delay: 0.3,
+            ease: "easeOut"
+          }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             About Me
-          </h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
+          </motion.h2>
+          <motion.div 
+            className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
             {contactInfo.map((item, index) => (
               <motion.a
                 key={index}
                 href={item.href || '#'}
                 className={`contact-item flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 ${!item.href ? 'cursor-default' : ''}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                 whileHover={item.href ? { scale: 1.05 } : {}}
                 whileTap={item.href ? { scale: 0.95 } : {}}
               >
@@ -101,14 +141,19 @@ export default function AboutMe() {
                 <span>{item.text}</span>
               </motion.a>
             ))}
-          </div>
-          <p className="text-gray-400 text-lg max-w-4xl mx-auto leading-relaxed">
+          </motion.div>
+          <motion.p 
+            className="text-gray-400 text-lg max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
             Full Stack Developer, freelancer, and Information Systems student with extensive experience in developing systems focused
             on process efficiency and automation. Skilled in creating robust and scalable solutions using a variety of languages and
             frameworks for both front-end and back-end. With experience in workflow system development for the Government of
             Minas Gerais, along with contributions to data analysis and AI projects, I aim to innovate continuously and bring analytical
             value and practicality to every project.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -119,10 +164,40 @@ export default function AboutMe() {
                          border border-gray-700/50 bg-gray-800/20
                          hover:bg-gray-800/30 transition-all duration-300
                          hover:border-gray-600/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.3)]"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: {
+                  duration: 0.6,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }
+              }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeOut"
+                }
+              }}
             >
-              <div className="flex items-start gap-4">
+              <motion.div 
+                className="flex items-start gap-4"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  x: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: (index * 0.1) + 0.2,
+                    ease: "easeOut"
+                  }
+                }}
+                viewport={{ once: true }}
+              >
                 <div className={`p-3 rounded-lg bg-gradient-to-br ${skill.color} 
                               group-hover:scale-110 transition-transform duration-300
                               shadow-[0_0_20px_rgba(0,0,0,0.3)]`}>
@@ -139,7 +214,7 @@ export default function AboutMe() {
                     {skill.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
               
               {/* Enhanced Decorative Elements */}
               <div className="absolute -bottom-px left-4 right-4 h-px bg-gradient-to-r 
