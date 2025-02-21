@@ -135,11 +135,11 @@ export default function Services() {
         pin: true,
         scrub: 1,
         start: 'top top',
-        end: () => `+=${cards.scrollWidth - window.innerWidth + 100}`,
+        end: () => `+=${cards.scrollWidth - window.innerWidth}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
         onUpdate: (self) => {
-          // Anima a linha principal baseado no progresso do scroll
+          // Animate main branch based on scroll progress
           const progress = self.progress;
           gsap.to(mainBranch, {
             '--progress': progress * 100,
@@ -151,7 +151,7 @@ export default function Services() {
 
     // Animate cards container
     tl.to(cards, {
-      x: () => -(cards.scrollWidth - window.innerWidth + 100),
+      x: () => -(cards.scrollWidth - window.innerWidth),
       ease: 'none',
     });
 
@@ -163,30 +163,17 @@ export default function Services() {
       const branchDot = branch.querySelector('.branch-dot');
       const branchContent = branch.querySelector('.branch-content');
       const connectingLine = branch.querySelector('.connecting-line');
+      const branchPulse = branch.querySelector('.branch-pulse');
       const isEven = index % 2 === 0;
 
-      if (branchLine && branchDot && branchContent && connectingLine) {
-        gsap.set(branch, { 
-          y: isEven ? -100 : 100,
-          opacity: 0 
-        });
-
+      if (branchLine && branchDot && branchContent && connectingLine && branchPulse) {
         ScrollTrigger.create({
           trigger: branch,
           containerAnimation: tl,
           start: 'left center',
           end: 'right center',
-          toggleActions: 'play none none reverse',
           onEnter: () => {
-            // Anima o card e seus elementos
-            gsap.to(branch, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power2.out'
-            });
-
-            // Anima a linha vertical
+            // Animate branch line with loading effect
             gsap.fromTo(branchLine, 
               { 
                 scaleY: 0,
@@ -194,50 +181,59 @@ export default function Services() {
               },
               {
                 scaleY: 1,
-                duration: 0.4,
+                duration: 0.6,
                 ease: 'power2.inOut'
               }
             );
 
-            // Anima o ponto da branch
+            // Animate branch dot with pulse effect
             gsap.fromTo(branchDot,
               { 
-                scale: 0,
-                opacity: 0 
+                scale: 0
               },
               {
                 scale: 1,
-                opacity: 1,
                 duration: 0.4,
                 ease: 'back.out(1.7)'
               }
             );
 
-            // Anima a linha de conexão
-            gsap.fromTo(connectingLine,
-              { 
-                scaleX: 0,
-                transformOrigin: 'left'
+            // Animate pulse effect
+            gsap.fromTo(branchPulse,
+              {
+                scale: 0.5,
+                opacity: 0.8
               },
               {
-                scaleX: 1,
-                duration: 0.6,
-                ease: 'power2.inOut',
-                delay: 0.2
+                scale: 2,
+                opacity: 0,
+                duration: 1.5,
+                repeat: -1,
+                ease: 'power2.out'
               }
             );
 
-            // Anima o conteúdo do card
-            gsap.fromTo(branchContent,
+            // Animate connecting line with gradient flow
+            gsap.fromTo(connectingLine,
               { 
-                opacity: 0,
-                scale: 0.8,
-                y: isEven ? -20 : 20
+                '--line-progress': '0%'
               },
               {
-                opacity: 1,
-                scale: 1,
+                '--line-progress': '100%',
+                duration: 0.8,
+                ease: 'power2.inOut'
+              }
+            );
+
+            // Animate card content
+            gsap.fromTo(branchContent,
+              { 
+                y: isEven ? -20 : 20,
+                scale: 0.95
+              },
+              {
                 y: 0,
+                scale: 1,
                 duration: 0.6,
                 delay: 0.3,
                 ease: 'power2.out'
@@ -291,7 +287,7 @@ export default function Services() {
         <div 
           ref={mainBranchRef}
           className="absolute left-0 right-0 h-1 top-1/2 transform -translate-y-1/2
-                     bg-gradient-to-r from-blue-500/30 to-purple-500/30"
+                     bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30"
           style={{
             '--progress': '0',
             maskImage: 'linear-gradient(to right, black var(--progress, 0%), transparent var(--progress, 0%))',
@@ -302,7 +298,7 @@ export default function Services() {
         {/* Cards Container */}
         <div 
           ref={cardsRef}
-          className="flex pl-[20%] space-x-32 pb-20 pr-[20%]"
+          className="flex space-x-24"
         >
           {t.services.map((service, index) => {
             const Icon = service.icon;
@@ -312,30 +308,44 @@ export default function Services() {
               <div
                 key={index}
                 ref={setRef(index)}
-                className={`relative flex-shrink-0 w-[400px] ${isEven ? '-translate-y-32' : 'translate-y-32'}`}
+                className={`relative flex-shrink-0 w-[400px] ${isEven ? '-translate-y-48' : 'translate-y-48'}`}
               >
                 {/* Connecting Line to Main Branch */}
                 <div 
-                  className={`absolute connecting-line h-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50
-                              ${isEven ? 'top-[calc(100%+64px)] left-8' : 'bottom-[calc(100%+64px)] left-8'}
+                  className={`absolute connecting-line h-1 
+                              ${isEven ? 'top-[calc(100%+96px)] left-8' : 'bottom-[calc(100%+96px)] left-8'}
                               w-32`}
+                  style={{
+                    background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
+                    '--line-progress': '0%',
+                    maskImage: 'linear-gradient(to right, black var(--line-progress), transparent var(--line-progress))',
+                    WebkitMaskImage: 'linear-gradient(to right, black var(--line-progress), transparent var(--line-progress))'
+                  } as React.CSSProperties}
                 />
 
                 {/* Vertical Branch Line */}
                 <div 
-                  className={`absolute branch-line w-1 bg-gradient-to-b from-blue-500/50 to-purple-500/50
+                  className={`absolute branch-line w-1 bg-gradient-to-b from-blue-500 to-purple-500
                               ${isEven ? 'top-full left-8' : 'bottom-full left-8'}
-                              h-16`}
+                              h-24`}
                 />
 
-                {/* Branch Dot */}
+                {/* Branch Dot with Pulse Effect */}
                 <div 
-                  className={`absolute branch-dot w-6 h-6 bg-blue-500 rounded-full
-                              ${isEven ? 'top-[calc(100%+64px)] left-6' : 'bottom-[calc(100%+64px)] left-6'}
-                              flex items-center justify-center border-2 border-white/20
-                              shadow-[0_0_20px_rgba(59,130,246,0.5)]`}
+                  className={`absolute ${isEven ? 'top-[calc(100%+96px)]' : 'bottom-[calc(100%+96px)]'} left-6`}
                 >
-                  <FaGithub className="w-3 h-3 text-white/70" />
+                  <div className="relative">
+                    <div 
+                      className="branch-pulse absolute inset-0 w-6 h-6 rounded-full bg-blue-500/30"
+                    />
+                    <div 
+                      className="branch-dot w-6 h-6 bg-blue-500 rounded-full
+                                flex items-center justify-center border-2 border-white/20
+                                shadow-[0_0_20px_rgba(59,130,246,0.5)] relative z-10"
+                    >
+                      <FaGithub className="w-3 h-3 text-white/70" />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Card Content */}
