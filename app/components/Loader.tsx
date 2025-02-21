@@ -2,6 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
+
+const translations = {
+  en: {
+    loading: 'Loading...',
+    command: 'npm run build'
+  },
+  pt: {
+    loading: 'Carregando...',
+    command: 'npm run build'
+  }
+};
 
 interface LoaderProps {
   onLoadingComplete: () => void;
@@ -9,6 +21,8 @@ interface LoaderProps {
 
 export default function Loader({ onLoadingComplete }: LoaderProps) {
   const [progress, setProgress] = useState(0);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,11 +55,11 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
           />
         </div>
         <div className="mt-2 text-center text-gray-400 text-sm font-mono">
-          Loading... {progress}%
+          {t.loading} {progress}%
         </div>
         <div className="absolute -top-8 left-0 right-0 text-center">
           <div className="inline-block px-3 py-1 bg-gray-800 rounded-lg text-sm text-gray-300 font-mono">
-            <span className="text-green-400">$</span> npm run build
+            <span className="text-green-400">$</span> {t.command}
           </div>
         </div>
       </div>

@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
+import { motion, useTransform, useScroll } from 'framer-motion';
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -79,6 +79,8 @@ const translations = {
 
 export default function Hero() {
   const { language } = useLanguage();
+  const { scrollYProgress } = useScroll();
+  const t = translations[language];
   const skillsTrackRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -88,15 +90,14 @@ export default function Hero() {
   const bottomLeftTagRef = useRef<HTMLDivElement>(null);
   const bottomRightTagRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Animate main text
-    gsap.from(textRef.current, {
-      duration: 1,
-      y: 30,
-      opacity: 0,
-      ease: "power3.out"
-    });
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
+  useEffect(() => {
     // Infinite scrolling animation for skills
     const skillsTrack = skillsTrackRef.current;
     if (skillsTrack) {
@@ -176,7 +177,10 @@ export default function Hero() {
       };
     };
     
-    typeMessage();
+    // Add delay before starting terminal animation
+    setTimeout(() => {
+      typeMessage();
+    }, 1000);
 
     return () => {
       isAnimating = false;
@@ -308,8 +312,6 @@ export default function Hero() {
     };
   }, []);
 
-  const t = translations[language];
-
   return (
     <div className="relative min-h-screen bg-[#1C1C1C] overflow-hidden pt-24">
       {/* Command Tags */}
@@ -353,65 +355,35 @@ export default function Hero() {
         <span className="text-purple-400">$</span> docker-compose up
       </div>
 
-      {/* Enhanced Grid Background with Mouse Interaction */}
-      <div 
+      {/* Background Pattern with Parallax */}
+      <motion.div 
         ref={gridRef}
-        className="absolute inset-0 z-0 transition-transform duration-300 ease-out
-                  before:content-[''] before:absolute before:inset-0 before:z-0
-                  before:bg-gradient-to-r before:from-transparent before:via-[#ffffff05] before:to-transparent
-                  before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-                  after:content-[''] after:absolute after:inset-0 after:z-[-1]
-                  after:bg-gradient-to-b after:from-[#ffffff05] after:via-transparent after:to-[#ffffff05]
-                  after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 80%),
-            linear-gradient(to right, rgba(75,75,75,0.15) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(75,75,75,0.15) 1px, transparent 1px),
-            linear-gradient(to right, rgba(50,50,50,0.1) 0.5px, transparent 0.5px),
-            linear-gradient(to bottom, rgba(50,50,50,0.1) 0.5px, transparent 0.5px)
-          `,
-          backgroundSize: '100% 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px',
-          backgroundPosition: 'center center',
-          boxShadow: 'inset 0 0 30px rgba(255,255,255,0.05)',
-          transition: 'transform 0.2s ease-out'
-        }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 300]) }}
+        className="absolute inset-0 grid-pattern"
       >
-        <div className="absolute inset-0 backdrop-blur-[1px] hover:backdrop-blur-[2px] transition-all duration-300"></div>
-      </div>
-      
-      {/* Subtle Gradient Overlay */}
-      <div 
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(28,28,28,0) 0%, rgba(28,28,28,0.7) 100%)'
-        }}
-      />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1C1C1C] via-transparent to-[#1C1C1C] opacity-90"></div>
+      </motion.div>
 
-      {/* Main Content Container - Added subtle backdrop blur */}
+      {/* Main Content Container */}
       <div className="relative z-10 container mx-auto px-6 pt-32 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Main Content */}
           <div ref={textRef} className="space-y-8 backdrop-blur-sm bg-[#1C1C1C]/30 p-8 rounded-xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white 
-                         [text-shadow:_0_0_30px_rgba(255,255,255,0.4)]">
+            <h1 className="text-4xl md:text-6xl font-bold text-white title-glow">
               Alexandre Amaral
             </h1>
             
-            <h2 className="text-2xl md:text-3xl text-gray-300 
-                         [text-shadow:_0_0_20px_rgba(255,255,255,0.3)]">
+            <h2 className="text-2xl md:text-3xl text-gray-300 subtitle-glow">
               {t.hero.title}
             </h2>
             <p className="text-gray-300 text-lg">
               {t.hero.description}
             </p>
 
-            {/* Contact Buttons */}
+            {/* Contact Button */}
             <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => scrollToSection('contact')}
                 className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
                          text-gray-200 rounded-lg border border-gray-700/50 
                          shadow-[0_0_15px_rgba(0,0,0,0.3)]
@@ -419,44 +391,49 @@ export default function Hero() {
                          hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
                          transition-all duration-300 ease-out"
               >
-                <FaGithub className="w-5 h-5 text-gray-300 group-hover:text-white 
-                                   transition-colors duration-300" />
-                <span>GitHub</span>
-              </a>
+                <span>{language === 'en' ? 'Contact Me' : 'Contate-me'}</span>
+                <svg 
+                  className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300 group-hover:translate-y-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </button>
 
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
-                         text-gray-200 rounded-lg border border-gray-700/50 
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         hover:bg-[#0077B5]/20 hover:border-[#0077B5]/50
-                         hover:shadow-[0_0_20px_rgba(0,119,181,0.2)]
+              <button
+                onClick={() => scrollToSection('about')}
+                className="group flex items-center gap-2 px-6 py-3 bg-transparent
+                         text-gray-300 rounded-lg border border-gray-700/50 
+                         hover:bg-[#2A2A2A]/30 hover:border-gray-600
+                         hover:text-white
                          transition-all duration-300 ease-out"
               >
-                <FaLinkedin className="w-5 h-5 text-gray-300 group-hover:text-[#0077B5] 
-                                     transition-colors duration-300" />
-                <span>LinkedIn</span>
-              </a>
-
-              <a
-                href="mailto:your.email@example.com"
-                className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
-                         text-gray-200 rounded-lg border border-gray-700/50 
-                         shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                         hover:bg-[#EA4335]/20 hover:border-[#EA4335]/50
-                         hover:shadow-[0_0_20px_rgba(234,67,53,0.2)]
-                         transition-all duration-300 ease-out"
-              >
-                <FaEnvelope className="w-5 h-5 text-gray-300 group-hover:text-[#EA4335] 
-                                     transition-colors duration-300" />
-                <span>Email</span>
-              </a>
+                <span>{language === 'en' ? 'About Me' : 'Sobre Mim'}</span>
+                <svg 
+                  className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
 
-          {/* Terminal - Enhanced with more prominent glow */}
+          {/* Terminal */}
           <div className="bg-[#2A2A2A]/90 backdrop-blur-sm rounded-lg p-6 
                         shadow-[0_0_30px_rgba(0,0,0,0.4)]
                         border border-gray-700/50
@@ -474,7 +451,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Skills Ticker - Enhanced with more prominent glow */}
+        {/* Skills Ticker */}
         <div className="mt-20 overflow-hidden relative">
           <div className="absolute left-0 top-0 w-[100px] h-full bg-gradient-to-r from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 w-[100px] h-full bg-gradient-to-l from-[#1C1C1C] to-transparent z-10 pointer-events-none"></div>
