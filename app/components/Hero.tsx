@@ -17,30 +17,19 @@ const translations = {
       contact: 'Contact'
     },
     hero: {
-      title: 'Software Developer',
-      description: 'Transforming ideas into elegant solutions through clean and efficient code.'
+      title: 'Full Stack Developer',
+      description: 'Building modern and scalable web applications'
     },
-    skills: [
-      'Back-end Development', 'Front-end Development', 'API Design', 
-      'Cloud Architecture', 'Database Engineering', 'DevOps', 
-      'System Design', 'Web Security', 'Mobile Development',
-      'UI/UX Design', 'Performance Optimization', 'Microservices'
-    ],
+    skills: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'AWS'],
     terminal: [
-      '> console.log("Hello, World! 👋");',
-      '⚡ Executing code...',
-      '✨ Output: Hello, World! 👋',
-      '> const message = "Welcome to my portfolio!";',
-      '⚡ Executing code...',
-      '✨ Output: Welcome to my portfolio!',
-      '> function greet(name) {',
-      '    return `Hello ${name}! Ready to code? 🚀`;',
-      '}',
-      '⚡ Executing code...',
-      '✨ Function greet() defined successfully!',
-      '> greet("Developer")',
-      '✨ Output: Hello Developer! Ready to code? 🚀'
-    ]
+      'Initializing system...',
+      'Loading dependencies...',
+      'Starting development server...',
+      'Ready for coding!'
+    ],
+    cta: {
+      contact: 'Get in Touch'
+    }
   },
   pt: {
     nav: {
@@ -50,30 +39,19 @@ const translations = {
       contact: 'Contato'
     },
     hero: {
-      title: 'Desenvolvedor de Software',
-      description: 'Transformando ideias em soluções elegantes através de código limpo e eficiente.'
+      title: 'Desenvolvedor Full Stack',
+      description: 'Construindo aplicações web modernas e escaláveis'
     },
-    skills: [
-      'Desenvolvimento Back-end', 'Desenvolvimento Front-end', 'Design de APIs', 
-      'Arquitetura em Nuvem', 'Engenharia de Banco de Dados', 'DevOps', 
-      'Design de Sistemas', 'Segurança Web', 'Desenvolvimento Mobile',
-      'Design de UI/UX', 'Otimização de Performance', 'Microsserviços'
-    ],
+    skills: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'AWS'],
     terminal: [
-      '> console.log("Olá, Mundo! 👋");',
-      '⚡ Executando código...',
-      '✨ Saída: Olá, Mundo! 👋',
-      '> const mensagem = "Bem-vindo ao meu portfólio!";',
-      '⚡ Executando código...',
-      '✨ Saída: Bem-vindo ao meu portfólio!',
-      '> function saudar(nome) {',
-      '    return `Olá ${nome}! Pronto para programar? 🚀`;',
-      '}',
-      '⚡ Executando código...',
-      '✨ Função saudar() definida com sucesso!',
-      '> saudar("Desenvolvedor")',
-      '✨ Saída: Olá Desenvolvedor! Pronto para programar? 🚀'
-    ]
+      'Inicializando sistema...',
+      'Carregando dependências...',
+      'Iniciando servidor de desenvolvimento...',
+      'Pronto para programar!'
+    ],
+    cta: {
+      contact: 'Entre em Contato'
+    }
   }
 };
 
@@ -89,13 +67,6 @@ export default function Hero() {
   const topLeftTagRef = useRef<HTMLDivElement>(null);
   const bottomLeftTagRef = useRef<HTMLDivElement>(null);
   const bottomRightTagRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   useEffect(() => {
     // Infinite scrolling animation for skills
@@ -383,7 +354,12 @@ export default function Hero() {
             {/* Contact Button */}
             <div className="flex flex-wrap gap-4 pt-4">
               <button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="group flex items-center gap-2 px-6 py-3 bg-[#2A2A2A]/80 
                          text-gray-200 rounded-lg border border-gray-700/50 
                          shadow-[0_0_15px_rgba(0,0,0,0.3)]
@@ -391,7 +367,7 @@ export default function Hero() {
                          hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
                          transition-all duration-300 ease-out"
               >
-                <span>{language === 'en' ? 'Contact Me' : 'Contate-me'}</span>
+                <span>{t.cta.contact}</span>
                 <svg 
                   className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300 group-hover:translate-y-1" 
                   fill="none" 
@@ -403,30 +379,6 @@ export default function Hero() {
                     strokeLinejoin="round" 
                     strokeWidth={2} 
                     d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('about')}
-                className="group flex items-center gap-2 px-6 py-3 bg-transparent
-                         text-gray-300 rounded-lg border border-gray-700/50 
-                         hover:bg-[#2A2A2A]/30 hover:border-gray-600
-                         hover:text-white
-                         transition-all duration-300 ease-out"
-              >
-                <span>{language === 'en' ? 'About Me' : 'Sobre Mim'}</span>
-                <svg 
-                  className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
               </button>

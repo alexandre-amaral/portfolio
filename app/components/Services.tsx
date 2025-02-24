@@ -252,7 +252,7 @@ export default function Services() {
   return (
     <div 
       ref={sectionRef}
-      className="relative bg-[#1C1C1C] overflow-hidden py-32 md:py-48"
+      className="relative bg-[#1C1C1C] overflow-hidden py-24 md:py-32"
     >
       {/* Background Pattern with Parallax */}
       <motion.div 
