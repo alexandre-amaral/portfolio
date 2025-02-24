@@ -260,15 +260,15 @@ const AboutMe = () => {
 
       // Skills categories animation
       const skillsItems = skills.querySelectorAll('.skills-category');
-      skillsItems.forEach((item) => {
+      skillsItems.forEach((item, index) => {
         gsap.from(item, {
-          y: 50,
+          x: index % 2 === 0 ? -100 : 100,
           opacity: 0,
           duration: 0.6,
           scrollTrigger: {
             trigger: item,
-            start: "top 90%",
-            end: "top 40%",
+            start: "top 80%",
+            end: "top 20%",
             scrub: 1,
             toggleActions: "play none none reverse"
           }
@@ -499,35 +499,41 @@ const AboutMe = () => {
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-16 text-center lg:text-left title-glow">
               {t.skills.title}
             </h3>
-            <div className="space-y-8">
+            <div className="space-y-12">
               {Object.entries(t.skills.categories).map(([category, skills]) => (
                 <div
                   key={category}
-                  className="skills-category bg-[#2A2A2A]/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 
-                           hover:border-gray-600/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]
-                           transition-all duration-300"
+                  className="skills-category relative pl-8"
                 >
-                  <h4 className="text-xl font-semibold text-white mb-6 flex items-center">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></span>
-                    {category}
-                  </h4>
-                  <div className="flex flex-wrap gap-3">
-                    {skills.map((skill) => (
-                      <div
-                        key={skill}
-                        className="group relative"
-                      >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 
-                                    group-hover:opacity-100 blur transition duration-300"></div>
-                        <span
-                          className="relative flex items-center px-4 py-2 bg-[#2A2A2A] rounded-full text-sm text-gray-300
-                                   group-hover:text-white group-hover:bg-[#2A2A2A]/80
-                                   transition-all duration-300"
+                  {/* Category Dot */}
+                  <div className="absolute left-0 top-[1.6rem] w-4 h-4 bg-blue-500 rounded-full
+                               shadow-[0_0_20px_rgba(59,130,246,0.5)] z-20"></div>
+                  
+                  <div className="bg-[#2A2A2A]/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 
+                               hover:border-gray-600/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]
+                               transition-all duration-300"
+                  >
+                    <h4 className="text-xl font-semibold text-white mb-6">
+                      {category}
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {skills.map((skill) => (
+                        <div
+                          key={skill}
+                          className="group relative"
                         >
-                          {skill}
-                        </span>
-                      </div>
-                    ))}
+                          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 
+                                      group-hover:opacity-100 blur transition duration-300"></div>
+                          <span
+                            className="relative flex items-center px-4 py-2 bg-[#2A2A2A] rounded-full text-sm text-gray-300
+                                     group-hover:text-white group-hover:bg-[#2A2A2A]/80
+                                     transition-all duration-300"
+                          >
+                            {skill}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}

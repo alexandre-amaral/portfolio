@@ -17,15 +17,15 @@ const ContactButton = ({ icon: Icon, text, href, className = "" }: ContactButton
     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
     whileHover={{ scale: 1.05, y: -5 }}
     whileTap={{ scale: 0.95 }}
-    className={`flex items-center gap-3 px-4 py-3 bg-[#2A2A2A]/80 
+    className={`flex items-center gap-3 px-6 py-4 bg-[#2A2A2A]/80 
               text-gray-200 rounded-lg border border-gray-700/50 
               shadow-[0_0_15px_rgba(0,0,0,0.3)]
               hover:bg-[#333333]/80 hover:border-gray-600/50
               hover:shadow-[0_0_20px_rgba(0,0,0,0.4)]
-              transition-all duration-300 ${className}`}
+              transition-all duration-300 w-full justify-center ${className}`}
   >
     <Icon className="text-gray-400 text-xl flex-shrink-0" />
-    <span className="text-gray-300 truncate text-sm md:text-base">{text}</span>
+    <span className="text-gray-300 text-sm md:text-base">{text}</span>
   </motion.a>
 );
 
@@ -52,27 +52,30 @@ const GetInTouch = () => {
         <p className="text-lg text-gray-400 mb-8 text-center subtitle-glow">
           {t.contact.subtitle}
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl">
-          <ContactButton
-            icon={SiProtonmail}
-            text={t.contact.email}
-            href={`mailto:${t.contact.email}`}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 w-full max-w-5xl">
           <ContactButton
             icon={FaMapMarkerAlt}
             text={t.contact.location}
             href="#"
-            className="cursor-default hover:scale-100 hover:transform-none"
+            className="cursor-default hover:scale-100 hover:transform-none lg:min-w-[300px]"
+          />
+          <ContactButton
+            icon={SiProtonmail}
+            text={t.contact.email}
+            href={`mailto:${t.contact.email}`}
+            className="lg:min-w-[300px]"
           />
           <ContactButton
             icon={FaGithub}
             text={t.contact.github}
             href="https://github.com/yourusername"
+            className="lg:min-w-[300px]"
           />
           <ContactButton
             icon={FaLinkedin}
             text={t.contact.linkedin}
             href="https://linkedin.com/in/yourusername"
+            className="lg:min-w-[300px]"
           />
         </div>
       </motion.div>

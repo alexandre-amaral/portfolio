@@ -252,7 +252,7 @@ export default function Services() {
   return (
     <div 
       ref={sectionRef}
-      className="relative bg-[#1C1C1C] overflow-hidden py-24 md:py-32"
+      className="relative bg-[#1C1C1C] overflow-hidden py-32 md:py-48"
     >
       {/* Background Pattern with Parallax */}
       <motion.div 
@@ -265,7 +265,7 @@ export default function Services() {
       {/* Main Container */}
       <div 
         ref={containerRef} 
-        className="relative min-h-[calc(100vh-8rem)] md:h-[calc(100vh-12rem)]"
+        className="relative min-h-[calc(100vh)] md:h-[calc(100vh)]"
       >
         {/* Section Header */}
         <motion.div
@@ -273,7 +273,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-24 md:mb-16 px-4 relative"
+          className="text-center mb-32 md:mb-24 px-4 relative"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-8 title-glow text-white">
             {t.title}
@@ -298,7 +298,7 @@ export default function Services() {
         {/* Cards Container */}
         <div 
           ref={cardsRef}
-          className="flex space-x-32 px-8 md:px-16 pb-32"
+          className="flex space-x-32 px-8 md:px-16 pb-64"
         >
           {t.services.map((service, index) => {
             const Icon = service.icon;
