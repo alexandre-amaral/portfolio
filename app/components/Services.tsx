@@ -252,7 +252,7 @@ export default function Services() {
   return (
     <div 
       ref={sectionRef}
-      className="relative bg-[#1C1C1C] overflow-hidden"
+      className="relative bg-[#1C1C1C] overflow-hidden py-24 md:py-32"
     >
       {/* Background Pattern with Parallax */}
       <motion.div 
@@ -265,7 +265,7 @@ export default function Services() {
       {/* Main Container */}
       <div 
         ref={containerRef} 
-        className="min-h-screen relative"
+        className="relative min-h-[calc(100vh-8rem)] md:h-[calc(100vh-12rem)]"
       >
         {/* Section Header */}
         <motion.div
@@ -273,9 +273,9 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center py-20"
+          className="text-center mb-24 md:mb-16 px-4 relative"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 title-glow text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 title-glow text-white">
             {t.title}
           </h2>
           <p className="text-xl text-gray-400 subtitle-glow">
@@ -298,7 +298,7 @@ export default function Services() {
         {/* Cards Container */}
         <div 
           ref={cardsRef}
-          className="flex space-x-24"
+          className="flex space-x-32 px-8 md:px-16 pb-32"
         >
           {t.services.map((service, index) => {
             const Icon = service.icon;
@@ -308,12 +308,12 @@ export default function Services() {
               <div
                 key={index}
                 ref={setRef(index)}
-                className={`relative flex-shrink-0 w-[400px] ${isEven ? '-translate-y-48' : 'translate-y-48'}`}
+                className={`relative flex-shrink-0 w-[300px] md:w-[400px] ${isEven ? '-translate-y-24 md:-translate-y-32' : 'translate-y-24 md:translate-y-32'}`}
               >
                 {/* Connecting Line to Main Branch */}
                 <div 
                   className={`absolute connecting-line h-1 
-                              ${isEven ? 'top-[calc(100%+96px)] left-8' : 'bottom-[calc(100%+96px)] left-8'}
+                              ${isEven ? 'top-[calc(100%+48px)] md:top-[calc(100%+96px)] left-8' : 'bottom-[calc(100%+48px)] md:bottom-[calc(100%+96px)] left-8'}
                               w-32`}
                   style={{
                     background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
@@ -327,12 +327,12 @@ export default function Services() {
                 <div 
                   className={`absolute branch-line w-1 bg-gradient-to-b from-blue-500 to-purple-500
                               ${isEven ? 'top-full left-8' : 'bottom-full left-8'}
-                              h-24`}
+                              h-12 md:h-24`}
                 />
 
                 {/* Branch Dot with Pulse Effect */}
                 <div 
-                  className={`absolute ${isEven ? 'top-[calc(100%+96px)]' : 'bottom-[calc(100%+96px)]'} left-6`}
+                  className={`absolute ${isEven ? 'top-[calc(100%+48px)] md:top-[calc(100%+96px)]' : 'bottom-[calc(100%+48px)] md:bottom-[calc(100%+96px)]'} left-6`}
                 >
                   <div className="relative">
                     <div 
@@ -351,22 +351,22 @@ export default function Services() {
                 {/* Card Content */}
                 <div 
                   className="branch-content bg-[#2A2A2A]/40 backdrop-blur-lg rounded-2xl
-                             border border-gray-700/50 p-8 h-full
+                             border border-gray-700/50 p-6 md:p-8 h-full
                              hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
                              transition-all duration-500 group"
                 >
-                  <div className="flex items-center mb-6">
-                    <div className="p-3 bg-blue-500/10 rounded-xl mr-4">
-                      <Icon className="w-10 h-10 text-blue-500 group-hover:text-blue-400 transition-colors" />
+                  <div className="flex items-center mb-4 md:mb-6">
+                    <div className="p-2 md:p-3 bg-blue-500/10 rounded-xl mr-3 md:mr-4">
+                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-blue-500 group-hover:text-blue-400 transition-colors" />
                     </div>
-                    <h3 className="text-2xl font-semibold text-white">{service.title}</h3>
+                    <h3 className="text-xl md:text-2xl font-semibold text-white">{service.title}</h3>
                   </div>
-                  <p className="text-gray-400 mb-8 leading-relaxed">{service.description}</p>
+                  <p className="text-gray-400 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">{service.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {service.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-4 py-2 bg-[#1C1C1C]/50 text-gray-300 text-sm
+                        className="px-3 md:px-4 py-1.5 md:py-2 bg-[#1C1C1C]/50 text-gray-300 text-xs md:text-sm
                                  rounded-full border border-gray-700/30
                                  hover:bg-blue-500/10 hover:border-blue-500/50
                                  transition-all duration-300"

@@ -44,12 +44,12 @@ export default function Navigation({ currentSection }: NavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <div className="mx-auto px-4 py-4">
+      <div className="mx-auto px-4 py-4 md:py-6">
         <div className="backdrop-blur-md bg-[#1C1C1C]/90 rounded-2xl 
                      border border-gray-700/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]
                      transition-all duration-300 hover:bg-[#1C1C1C]/95
                      hover:border-gray-600/50 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)]">
-          <div className="relative flex items-center justify-between h-16 px-4">
+          <div className="relative flex items-center justify-between h-14 md:h-16 px-4">
             {/* Logo/Name */}
             <div className="flex-shrink-0">
               <a href="#" className="text-white font-bold text-xl 
@@ -122,7 +122,7 @@ export default function Navigation({ currentSection }: NavigationProps) {
           {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && (
             <div className="md:hidden border-t border-gray-700/30 mt-2">
-              <div className="flex flex-col space-y-2 p-4">
+              <div className="flex flex-col space-y-1 p-3">
                 {navItems.map((item) => (
                   <a
                     key={item.id}
