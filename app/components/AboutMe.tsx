@@ -5,8 +5,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaRocket, FaLightbulb, FaCogs } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Projects from './Projects';
+import GetInTouch from './GetInTouch';
+import { useTranslations } from '../hooks/useTranslations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -541,6 +543,9 @@ const AboutMe = () => {
 
         {/* Projects Section */}
         <Projects />
+
+        {/* Get In Touch Section */}
+        <GetInTouch />
       </div>
     </motion.div>
   );
