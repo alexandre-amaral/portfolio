@@ -1,0 +1,7 @@
+.translate-y-parallax {
+  transform: translateY(var(--parallax-y));
+}
+
+.project-image {
+  background-image: url(attr(data-image));
+}

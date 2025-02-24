@@ -7,6 +7,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GetInTouch from './GetInTouch';
+import Projects from './Projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -432,7 +433,7 @@ const AboutMe = () => {
         {/* Experience and Skills Section with Parallax */}
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0.6, 1], [0, -60]) }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative mb-32"
         >
           {/* Command Tags for Experience/Skills Section */}
           <div
@@ -539,6 +540,38 @@ const AboutMe = () => {
               ))}
             </div>
           </div>
+        </motion.div>
+
+        {/* Projects Section */}
+        <Projects />
+
+        {/* Get In Touch Section with Parallax */}
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0.3, 0.7], [0, -30]) }}
+          className="relative"
+        >
+          {/* Command Tags for Contact Section */}
+          <div
+            className="absolute -top-8 left-4 z-40 font-mono text-sm bg-[#2A2A2A]/90 
+                     text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                     shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                     transition-all duration-200 ease-out cursor-pointer
+                     hover:scale-105 hover:border-gray-600"
+          >
+            <span className="text-pink-400">$</span> mail -s &quot;Hello&quot; contact@me.com
+          </div>
+
+          <div
+            className="absolute -top-8 right-4 z-40 font-mono text-sm bg-[#2A2A2A]/90 
+                     text-gray-300 px-4 py-2 rounded-lg border border-gray-700/50 
+                     shadow-[0_0_15px_rgba(0,0,0,0.3)] backdrop-blur-sm
+                     transition-all duration-200 ease-out cursor-pointer
+                     hover:scale-105 hover:border-gray-600"
+          >
+            <span className="text-cyan-400">$</span> ssh connect@portfolio
+          </div>
+
+          <GetInTouch />
         </motion.div>
       </div>
     </motion.div>

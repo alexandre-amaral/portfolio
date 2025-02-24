@@ -265,7 +265,7 @@ export default function Services() {
       {/* Main Container */}
       <div 
         ref={containerRef} 
-        className="relative min-h-[calc(100vh)] md:h-[calc(100vh)]"
+        className="relative min-h-[calc(100vh+8rem)] md:h-[calc(100vh+8rem)]"
       >
         {/* Section Header */}
         <motion.div
@@ -273,7 +273,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-32 md:mb-24 px-4 relative"
+          className="text-center mb-32 md:mb-24 px-4 relative pt-16 md:pt-24"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-8 title-glow text-white">
             {t.title}
@@ -308,7 +308,7 @@ export default function Services() {
               <div
                 key={index}
                 ref={setRef(index)}
-                className={`relative flex-shrink-0 w-[300px] md:w-[400px] ${isEven ? '-translate-y-24 md:-translate-y-32' : 'translate-y-24 md:translate-y-32'}`}
+                className={`relative flex-shrink-0 w-[300px] md:w-[400px] ${isEven ? '-translate-y-32 md:-translate-y-40' : 'translate-y-32 md:translate-y-40'}`}
               >
                 {/* Connecting Line to Main Branch */}
                 <div 
