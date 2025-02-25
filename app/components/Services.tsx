@@ -134,7 +134,7 @@ export default function Services() {
         trigger: container,
         pin: true,
         scrub: 1,
-        start: 'top top',
+        start: 'center center',
         end: () => `+=${cards.scrollWidth - window.innerWidth}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
@@ -265,7 +265,7 @@ export default function Services() {
       {/* Main Container */}
       <div 
         ref={containerRef} 
-        className="relative min-h-[calc(100vh+8rem)] md:h-[calc(100vh+8rem)]"
+        className="relative min-h-[calc(100vh+32rem)] md:h-[calc(100vh+32rem)]"
       >
         {/* Section Header */}
         <motion.div
@@ -273,12 +273,12 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-32 md:mb-24 px-4 relative pt-16 md:pt-24"
+          className="text-center mb-48 md:mb-64 px-4 relative pt-24 md:pt-32"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-8 title-glow text-white">
             {t.title}
           </h2>
-          <p className="text-xl text-gray-400 subtitle-glow">
+          <p className="text-xl text-gray-400 subtitle-glow max-w-2xl mx-auto">
             {t.subtitle}
           </p>
         </motion.div>
@@ -286,7 +286,7 @@ export default function Services() {
         {/* Main Branch Line */}
         <div 
           ref={mainBranchRef}
-          className="absolute left-0 right-0 h-1 top-1/2 transform -translate-y-1/2
+          className="absolute left-0 right-0 h-1 top-[60%] transform -translate-y-1/2
                      bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30"
           style={{
             '--progress': '0',
@@ -298,7 +298,7 @@ export default function Services() {
         {/* Cards Container */}
         <div 
           ref={cardsRef}
-          className="flex space-x-32 px-8 md:px-16 pb-64"
+          className="flex space-x-32 px-8 md:px-16 pb-96 pt-32 md:pt-48"
         >
           {t.services.map((service, index) => {
             const Icon = service.icon;

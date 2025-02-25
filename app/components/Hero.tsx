@@ -72,12 +72,16 @@ export default function Hero() {
     // Infinite scrolling animation for skills
     const skillsTrack = skillsTrackRef.current;
     if (skillsTrack) {
+      // Configuração da animação infinita
       const animation = gsap.to(skillsTrack, {
-        x: `-50%`,
-        duration: 30,
+        x: '-50%',
+        duration: 20,
+        ease: 'none',
         repeat: -1,
-        ease: "none",
-        repeatDelay: 0
+        onRepeat: () => {
+          // Reseta a posição quando a animação completa
+          gsap.set(skillsTrack, { x: '0%' });
+        }
       });
 
       return () => {
@@ -412,7 +416,8 @@ export default function Hero() {
             className="flex gap-8 whitespace-nowrap"
             style={{ width: 'fit-content' }}
           >
-            {[...t.skills, ...t.skills].map((skill, index) => (
+            {/* Repetimos as skills 4 vezes para garantir uma rolagem suave */}
+            {[...t.skills, ...t.skills, ...t.skills, ...t.skills].map((skill, index) => (
               <span
                 key={index}
                 className="text-gray-200 bg-[#2A2A2A]/80 px-6 py-3 rounded-full
