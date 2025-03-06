@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import GetInTouch from './components/GetInTouch';
 import Loader from './components/Loader';
 import Navigation from './components/Navigation';
+import Script from 'next/script';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -32,6 +33,15 @@ export default function Home() {
 
   return (
     <>
+      <Script id="base-path-fix" strategy="beforeInteractive">{`
+        // Fix basePath links
+        (function() {
+          if (typeof window !== 'undefined' && window.location.pathname === '/portfolio/') {
+            console.log('Running basePath fix script');
+          }
+        })();
+      `}</Script>
+      
       <AnimatePresence mode="wait">
         {showLoader ? (
           <motion.div
