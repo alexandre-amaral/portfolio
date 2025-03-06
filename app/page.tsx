@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import Services from './components/Services';
+import Projects from './components/Projects';
+import GetInTouch from './components/GetInTouch';
 import Loader from './components/Loader';
 import Navigation from './components/Navigation';
 
@@ -89,6 +91,32 @@ export default function Home() {
               onViewportEnter={() => setCurrentSection('about')}
             >
               <AboutMe />
+            </motion.section>
+            
+            {/* Projects Section */}
+            <motion.section 
+              id="projects" 
+              className="relative z-10"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              viewport={{ once: true }}
+              onViewportEnter={() => setCurrentSection('projects')}
+            >
+              <Projects />
+            </motion.section>
+            
+            {/* Contact Section */}
+            <motion.section 
+              id="contact" 
+              className="relative z-5"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              viewport={{ once: true }}
+              onViewportEnter={() => setCurrentSection('contact')}
+            >
+              <GetInTouch />
             </motion.section>
           </motion.div>
         )}

@@ -86,19 +86,33 @@ export default function Navigation({ currentSection }: NavigationProps) {
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
-                className="flex items-center gap-2 px-3 py-2
+                className="relative flex items-center gap-2 px-3 py-2
                          bg-[#2A2A2A]/90 backdrop-blur-md
                          text-gray-200 rounded-lg border border-gray-700/50 
                          shadow-[0_0_15px_rgba(0,0,0,0.3)]
                          hover:bg-[#333333]/95 hover:border-gray-600
                          hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]
                          transition-all duration-300 ease-out
+                         overflow-hidden
                          group"
               >
+                {/* Animated glow effect */}
+                <div className="absolute inset-0 -z-10">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r 
+                                from-blue-500/40 via-purple-500/40 to-pink-500/40 
+                                animate-pulse-slow blur-sm"></div>
+                </div>
+                
+                {/* Animated border */}
+                <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r 
+                              from-blue-500 via-purple-500 to-pink-500 
+                              bg-200% animate-rotate-gradient opacity-70 -z-10"></div>
+                
+                {/* Content */}
                 <FaLanguage className="w-5 h-5 text-gray-300 group-hover:text-white 
-                                   transition-colors duration-300" />
-                <span className="font-medium">
-                  {language === 'en' ? 'EN' : 'PT'}
+                                   transition-colors duration-300 z-10" />
+                <span className="font-medium z-10">
+                  {language === 'en' ? 'Português' : 'English'}
                 </span>
               </button>
 

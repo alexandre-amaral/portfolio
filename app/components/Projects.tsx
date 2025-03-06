@@ -64,7 +64,7 @@ const techIcons: { [key: string]: React.ElementType } = {
 
 export default function Projects() {
   const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -131,7 +131,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="relative bg-[#1C1C1C] overflow-hidden py-16 md:py-24">
+    <div className="relative bg-[#1C1C1C] overflow-hidden py-16 md:py-24" id="projects">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
@@ -143,12 +143,12 @@ export default function Projects() {
           <motion.h2 
             className="text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-white"
           >
-            {t.title}
+            {t?.title || 'Featured Projects'}
           </motion.h2>
           <motion.p 
             className="text-xl text-gray-400 max-w-2xl mx-auto"
           >
-            {t.subtitle}
+            {t?.subtitle || 'A selection of my most recent work'}
           </motion.p>
         </motion.div>
 
@@ -161,7 +161,7 @@ export default function Projects() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-[900px]">
-            {t.projects.map((project, index) => (
+            {t?.projects?.map((project, index) => (
               <motion.div
                 key={index}
                 variants={cardVariants}

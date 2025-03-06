@@ -17,10 +17,10 @@ const translations = {
       contact: 'Contact'
     },
     hero: {
-      title: 'Full Stack Developer',
-      description: 'Building modern and scalable web applications'
+      title: 'Back-End Developer & Data Analyst',
+      description: 'Building robust systems focused on efficiency and process automation'
     },
-    skills: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'AWS'],
+    skills: ['JavaScript', 'Python', 'SQL', 'React', 'Node.js', 'Laravel'],
     terminal: [
       'Initializing system...',
       'Loading dependencies...',
@@ -39,10 +39,10 @@ const translations = {
       contact: 'Contato'
     },
     hero: {
-      title: 'Desenvolvedor Full Stack',
-      description: 'Construindo aplicações web modernas e escaláveis'
+      title: 'Desenvolvedor Back-End & Analista de Dados',
+      description: 'Construindo sistemas robustos focados em eficiência e automação de processos'
     },
-    skills: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'AWS'],
+    skills: ['JavaScript', 'Python', 'SQL', 'React', 'Node.js', 'Laravel'],
     terminal: [
       'Inicializando sistema...',
       'Carregando dependências...',
@@ -58,7 +58,7 @@ const translations = {
 export default function Hero() {
   const { language } = useLanguage();
   const { scrollYProgress } = useScroll();
-  const t = translations[language];
+  const t = translations[language] || translations.en;
   const skillsTrackRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -99,7 +99,7 @@ export default function Hero() {
     const typeMessage = () => {
       if (!terminalRef.current || !isAnimating) return;
 
-      const messages = translations[language].terminal;
+      const messages = translations[language]?.terminal || translations.en.terminal;
       const isExecuting = messages[currentMessage].startsWith('⚡');
       const isOutput = messages[currentMessage].startsWith('✨');
       

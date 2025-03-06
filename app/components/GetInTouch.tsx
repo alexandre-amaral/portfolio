@@ -68,13 +68,13 @@ const GetInTouch = () => {
           <ContactButton
             icon={FaGithub}
             text={t.contact.github}
-            href="https://github.com/yourusername"
+            href="https://github.com/alexandre-amaral"
             className="lg:min-w-[300px]"
           />
           <ContactButton
             icon={FaLinkedin}
             text={t.contact.linkedin}
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/alexandre-amaral-570976225/"
             className="lg:min-w-[300px]"
           />
         </div>
