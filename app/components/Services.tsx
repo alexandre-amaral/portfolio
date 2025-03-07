@@ -144,49 +144,50 @@ export default function Services() {
   });
 
   useLayoutEffect(() => {
-    // Make sure GSAP and ScrollTrigger are available
     if (typeof window !== "undefined") {
-      // Clear any existing ScrollTriggers to prevent duplicates
+      // Limpa quaisquer ScrollTriggers antigos para evitar duplicatas
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      
-      const section = sectionRef.current;
-      const slider = sliderRef.current;
-      
-      if (!section || !slider) return;
-      
-      // Calculate the width of all cards plus gaps
-      const totalWidth = slider.scrollWidth;
-      const viewportWidth = window.innerWidth;
-      
-      // Only create the horizontal scroll effect if there's enough content to scroll
-      if (totalWidth > viewportWidth) {
-        // Create the horizontal scroll animation
-        const horizontalScroll = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${totalWidth - viewportWidth + 100}`,
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true
-          }
-        });
-        
-        // Animate the slider from its starting position to the end
-        horizontalScroll.to(slider, {
-          x: -(totalWidth - viewportWidth + 100),
-          ease: "none",
-          duration: 1
-        });
-      }
+  
+      requestAnimationFrame(() => {
+        const section = sectionRef.current;
+        const slider = sliderRef.current;
+  
+        if (!section || !slider) return;
+  
+        // Calcular a largura total do conteúdo do slider
+        const totalWidth = slider.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        console.log('totalWidth:', totalWidth, 'viewportWidth:', viewportWidth);
+  
+        // Só cria o scroll horizontal se realmente houver conteúdo mais largo que o viewport
+        if (totalWidth > viewportWidth) {
+          const horizontalScroll = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: () => `+=${totalWidth - viewportWidth + 100}`,
+              scrub: 1,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+  
+          // Anima o slider horizontalmente
+          horizontalScroll.to(slider, {
+            x: -(totalWidth - viewportWidth + 100),
+            ease: 'none',
+            duration: 1,
+          });
+        }
+      });
     }
-    
-    // Cleanup function
+  
+    // Cleanup para remover ScrollTriggers ao desmontar
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [language]); // Re-run when language changes
+  }, [language]);
 
   return (
     <div 
