@@ -9,18 +9,19 @@ const translations = {
   en: {
     title: 'Featured Projects',
     subtitle: 'A selection of my most recent work',
+    viewOnGithub: 'View on GitHub',
     projects: [
       {
         title: 'PDE Calculator',
         description: 'AI-powered tool for researchers and pharmaceutical professionals that automates Permitted Daily Exposure (PDE) calculations. Features include AI-powered data extraction using OpenAI API, accurate PDE calculations with detailed breakdowns, and full regulatory compliance with ICH guidelines.',
-        github: 'https://github.com/yourusername/pde-calculator',
+        github: 'https://github.com/alexandre-amaral/PDE-Calculator',
         technologies: ['Python', 'OpenAI API', 'React', 'TypeScript', 'MongoDB', 'Docker'],
         category: 'AI & Healthcare'
       },
       {
         title: 'CV Analyzer Prototype',
         description: 'Advanced CV analysis system that automates resume screening and job matching using NLP and machine learning. Features automated data extraction, multiple similarity analysis methods (TF-IDF, LDA, BERT), and comprehensive candidate ranking system.',
-        github: 'https://github.com/yourusername/cv-analyzer-prototype',
+        github: 'https://github.com/alexandre-amaral/Automated-Resume-Analysis',
         technologies: ['Python', 'MongoDB', 'scikit-learn', 'BERT', 'FastAPI', 'Docker'],
         category: 'AI & ML'
       }
@@ -29,18 +30,19 @@ const translations = {
   pt: {
     title: 'Projetos em Destaque',
     subtitle: 'Uma seleção dos meus trabalhos mais recentes',
+    viewOnGithub: 'Ver no GitHub',
     projects: [
       {
         title: 'Calculadora PDE',
         description: 'Ferramenta baseada em IA para pesquisadores e profissionais farmacêuticos que automatiza cálculos de Exposição Diária Permitida (PDE). Inclui extração de dados com IA usando API OpenAI, cálculos precisos de PDE com análises detalhadas e conformidade regulatória com diretrizes ICH.',
-        github: 'https://github.com/yourusername/pde-calculator',
+        github: 'https://github.com/alexandre-amaral/PDE-Calculator',
         technologies: ['Python', 'OpenAI API', 'React', 'TypeScript', 'MongoDB', 'Docker'],
         category: 'IA & Saúde'
       },
       {
         title: 'Protótipo Analisador de CV',
         description: 'Sistema avançado de análise de currículos que automatiza a triagem de currículos e correspondência de empregos usando PNL e aprendizado de máquina. Possui extração automática de dados, múltiplos métodos de análise de similaridade (TF-IDF, LDA, BERT) e sistema abrangente de classificação de candidatos.',
-        github: 'https://github.com/yourusername/cv-analyzer-prototype',
+        github: 'https://github.com/alexandre-amaral/Automated-Resume-Analysis',
         technologies: ['Python', 'MongoDB', 'scikit-learn', 'BERT', 'FastAPI', 'Docker'],
         category: 'IA & ML'
       }
@@ -172,13 +174,7 @@ export default function Projects() {
                              flex flex-col
                              hover:border-blue-500/30 hover:bg-[#2A2A2A]/60
                              hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]
-                             transition-all duration-500 ease-out
-                             relative before:absolute before:inset-0 
-                             before:bg-gradient-to-b before:from-transparent 
-                             before:via-transparent before:to-[#1C1C1C]/10
-                             before:rounded-xl before:opacity-0
-                             hover:before:opacity-100 before:transition-opacity
-                             before:duration-500">
+                             transition-all duration-500 ease-out">
                   {/* Category Badge */}
                   <motion.div
                     variants={contentVariants}
@@ -233,20 +229,27 @@ export default function Projects() {
                   </motion.div>
 
                   {/* GitHub Link */}
-                  <motion.a
+                  <motion.div
                     variants={contentVariants}
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    className="inline-flex items-center gap-2 px-4 py-2
-                             text-gray-400 text-sm
-                             hover:text-white group/link
-                             transition-colors duration-300"
+                    className="mt-auto"
                   >
-                    <FaGithub className="w-4 h-4 transition-transform duration-300 group-hover/link:rotate-3" />
-                    <span>GitHub</span>
-                  </motion.a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2
+                               bg-[#1C1C1C] rounded-lg
+                               text-gray-300 text-sm font-medium
+                               border border-gray-700/30
+                               hover:bg-gray-800 hover:text-white
+                               hover:border-gray-600
+                               transition-all duration-300
+                               cursor-pointer"
+                    >
+                      <FaGithub className="w-5 h-5" />
+                      <span>{t?.viewOnGithub || 'View on GitHub'}</span>
+                    </a>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}

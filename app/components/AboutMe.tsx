@@ -531,8 +531,8 @@ const AboutMe = () => {
           </div>
 
           {/* Experience Timeline */}
-          <div ref={experienceRef} className="bg-[#2A2A2A]/10 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 relative overflow-hidden">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-16 text-center lg:text-left title-glow">
+          <div ref={experienceRef} className="bg-[#2A2A2A]/10 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 relative overflow-hidden h-full">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-12 text-center lg:text-left title-glow">
               {t?.experience?.title || 'Experience'}
             </h3>
             <div className="relative">
@@ -540,31 +540,31 @@ const AboutMe = () => {
               <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-gray-700 via-blue-500/50 to-gray-700"></div>
               
               {/* Timeline Items */}
-              <div className="relative space-y-12 md:space-y-16">
-                {t?.experience?.items?.map((item, index) => (
+              <div className="relative space-y-8">
+                {t?.experience?.items?.slice(0, 4).map((item, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -10 }} // Reduzido de -20 para -10
+                    initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.5, margin: "-25px" }} // Ajustado para aparecer mais cedo
-                    transition={{ duration: 0.2, delay: index * 0.02 }} // Reduzido para 0.2 e delay menor
+                    viewport={{ once: true, amount: 0.5, margin: "-25px" }}
+                    transition={{ duration: 0.2, delay: index * 0.02 }}
                     className="timeline-item relative flex items-center pl-8"
                   >
                     {/* Timeline Dot */}
-                    <div className="timeline-dot absolute left-0 top-1/2 w-4 h-4 bg-blue-500 rounded-full transform -translate-y-1/2
+                    <div className="timeline-dot absolute left-0 top-1/2 w-3 h-3 bg-blue-500 rounded-full transform -translate-y-1/2
                                  shadow-[0_0_20px_rgba(59,130,246,0.5)] z-20"></div>
                     
                     {/* Content Card */}
                     <div className="timeline-content w-full">
-                      <div className="bg-[#2A2A2A]/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50
+                      <div className="bg-[#2A2A2A]/30 backdrop-blur-sm p-4 rounded-xl border border-gray-700/50
                                   transform hover:scale-[1.02] hover:border-gray-600/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]
                                   transition-all duration-300">
-                        <div className="flex items-center justify-between mb-4">
-                          <h4 className="text-xl font-semibold text-white">{item?.position}</h4>
-                          <span className="text-blue-400 font-bold">{item?.year}</span>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="text-lg font-semibold text-white">{item?.position}</h4>
+                          <span className="text-blue-400 font-bold text-sm">{item?.year}</span>
                         </div>
-                        <p className="text-gray-400 mb-2">{item?.company}</p>
-                        <p className="text-gray-500">{item?.description}</p>
+                        <p className="text-gray-400 text-sm mb-1">{item?.company}</p>
+                        <p className="text-gray-500 text-sm">{item?.description}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -573,14 +573,14 @@ const AboutMe = () => {
             </div>
           </div>
 
-          {/* Skills Section - Apenas com Framer Motion */}
+          {/* Skills Section */}
           <motion.div 
             ref={skillsRef}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
-            className="bg-[#2A2A2A]/10 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 relative overflow-hidden"
+            className="bg-[#2A2A2A]/10 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50 relative overflow-hidden h-full"
           >
             {/* Decorative background elements */}
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-br from-green-500/10 to-transparent rounded-full"></div>
@@ -590,12 +590,12 @@ const AboutMe = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-2xl md:text-3xl font-bold text-white mb-12 md:mb-16 text-center lg:text-left title-glow relative z-10"
+              className="text-2xl md:text-3xl font-bold text-white mb-12 text-center lg:text-left title-glow relative z-10"
             >
               {t?.skills?.title || 'Skills & Technologies'}
             </motion.h3>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               {Object.entries(t?.skills?.categories || {}).map(([category, skills], index) => (
                 <motion.div 
                   key={index}
@@ -603,7 +603,7 @@ const AboutMe = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="skills-category space-y-4"
+                  className="skills-category space-y-3"
                 >
                   <h4 className="text-lg font-semibold text-white border-l-4 border-blue-500 pl-3 py-1">{category}</h4>
                   <div className="flex flex-wrap gap-2">
@@ -615,7 +615,7 @@ const AboutMe = () => {
                         transition={{ duration: 0.2, delay: 0.1 + (skillIndex * 0.03) }}
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.98 }}
-                        className="px-4 py-2 bg-[#1d2230]/80 text-gray-300 text-sm
+                        className="px-3 py-1.5 bg-[#1d2230]/80 text-gray-300 text-sm
                                  rounded-lg border border-gray-700/30
                                  hover:bg-[#1d2230]/95 hover:border-blue-500/50 hover:text-blue-300
                                  hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]
