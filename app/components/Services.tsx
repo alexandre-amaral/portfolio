@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import gsap from 'gsap';
@@ -143,7 +143,7 @@ export default function Services() {
     offset: ["start end", "end start"]
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Make sure GSAP and ScrollTrigger are available
     if (typeof window !== "undefined") {
       // Clear any existing ScrollTriggers to prevent duplicates
