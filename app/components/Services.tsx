@@ -153,6 +153,10 @@ export default function Services() {
         const slider = sliderRef.current;
   
         if (!section || !slider) return;
+
+        console.log('slider.scrollWidth:', slider.scrollWidth);
+        console.log('window.innerWidth:', window.innerWidth);
+  
   
         // Calcular a largura total do conteúdo do slider
         const totalWidth = slider.scrollWidth;
