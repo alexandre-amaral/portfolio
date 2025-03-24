@@ -29,12 +29,13 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onLoadingComplete, 500); // Give time for final animation
+          setTimeout(onLoadingComplete, 400); // Tempo intermediário para transição final
           return 100;
         }
-        return prev + 1;
+        // Incremento moderado para carregamento
+        return Math.min(prev + 2, 100);
       });
-    }, 20);
+    }, 15); // Intervalo intermediário
 
     return () => clearInterval(timer);
   }, [onLoadingComplete]);
@@ -43,6 +44,7 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: progress === 100 ? 0 : 1 }}
+      transition={{ duration: 0.4 }} // Transição moderada
       className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C1C1C]"
     >
       <div className="w-64 relative">
@@ -51,7 +53,7 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
             className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.08 }} // Animação moderada
           />
         </div>
         <div className="mt-2 text-center text-gray-400 text-sm font-mono">

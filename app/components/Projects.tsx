@@ -16,7 +16,7 @@ const translations = {
         description: 'Deep learning application for pneumonia detection in chest X-rays using MobileNetV3 Small architecture. Achieves 93% accuracy with fast inference (~45ms/image) and provides an intuitive web interface with adjustable threshold settings to balance sensitivity and specificity for clinical use.',
         github: 'https://github.com/alexandre-amaral/MVP-AI-Powered-Pneumonia-Classifier-for-Chest-X-rays',
         technologies: ['Python', 'TensorFlow', 'MobileNetV3', 'Flask', 'Deep Learning', 'HTML/CSS'],
-        category: 'AI & Healthcare'
+        category: 'AI & Health Tech'
       },
       {
         title: 'PDE Calculator',
